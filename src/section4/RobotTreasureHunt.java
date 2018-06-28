@@ -13,53 +13,82 @@ import javax.swing.JOptionPane;
 //import org.teachingextensions.logo.robot;
 import org.jointheleague.graphical.robot.Robot;
 
-public class RobotTreasureHunt implements KeyEventDispatcher{
+public class RobotTreasureHunt implements KeyEventDispatcher {
 
-	// 1. Create a new mini robot (type "mini" inside the parentheses)
-	
+	// 1. Create a new mini robot
+	Robot r = new Robot("mini");
+
 	private void goUp() throws InterruptedException {
-		// 2. Make the robot move up the screen (use setAngle(angle) and microMove(distance))
-		
+		// 2. Make the robot move up the screen (use setAngle(angle) and
+		// microMove(distance))
+		r.setAngle(0);
+		r.microMove(10);
 	}
 
-	private void goDown() throws InterruptedException{
-		// 3. make the robot move down the screen (use setAngle(angle) and microMove(distance))
-		
+	private void goDown() throws InterruptedException {
+		// 3. make the robot move down the screen (use setAngle(angle) and
+		// microMove(distance))
+		r.setAngle(180);
+		r.microMove(10);
 	}
 
-	private void turnLeft() throws InterruptedException{
-		// 4. Make the robot turn to the left (use setAngle(angle) and microMove(distance))
+	private void turnLeft() throws InterruptedException {
+		// 4. Make the robot turn to the left (use setAngle(angle) and
+		// microMove(distance))
+		r.setAngle(-90);
+		r.microMove(10);
 
 	}
 
-	private void turnRight() throws InterruptedException{
-		// 5. make the robot turn to the right (use setAngle(angle) and microMove(distance))
-		
+	private void turnRight() throws InterruptedException {
+		// 5. make the robot turn to the right (use setAngle(angle) and
+		// microMove(distance))
+		r.setAngle(90);
+		r.microMove(10);
+
 	}
 
 	private void spaceBarWasPressed() {
 
-		// 5. Change ROBOTNAME below to match the name of the robot you created in step 1.  THEN, remove the slashes at the beginning of the next two lines
-		//int robotXLocation = ROBOTNAME.getX();
-		//int robotYLocation = ROBOTNAME.getY();
-		
-		// 6. Print the robotXLocation and robotYLocation variables to the console 
-		
+		// 5. Change ROBOTNAME below to match the name of the robot you created in step
+		// 1. THEN, remove the slashes at the beginning of the next two lines
+		// int robotXLocation = ROBOTNAME.getX();
+		// int robotYLocation = ROBOTNAME.getY();
+		int robotXLocation = r.getX();
+		int robotYLocation = r.getY();
+		// 6. Print the robotXLocation and robotYLocation variables to the console
+		System.out.println(robotXLocation);
+		System.out.println(robotYLocation);
 		// 7. If robot is at same location as the little girl
-		//      --make a pop-up tell the robot where to go next
-		
+		// --make a pop-up tell the robot where to go next
+		if (robotXLocation == 720) {
+			if (robotYLocation == 420) {
+				JOptionPane.showMessageDialog(null, "Go find the pirate flag.");
+			}
+		}
+		if (robotXLocation == 450) {
+			if (robotYLocation == 160) {
+				JOptionPane.showMessageDialog(null, "Go find the cannon.");
+			}
+		}
+
 		// 8. Give the user subsequent clues at different locations on the image
 		// (pirate robot, swamp, parrots, etc.)
-		
-		// 9.  If the robot is in the final location
-		//     --call the treasureFound() method
-		
+
+		// 9. If the robot is in the final location
+		// --call the treasureFound() method
+		if (robotXLocation == 700) {
+			if (robotYLocation == 250) {
+				treasureFound();
+			}
+		}
+
 	}
 
 	private void go() {
 		KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(this);
 		Robot.setWindowImage("section4/treasure_hunt.jpg");
-	
+
 		JOptionPane.showMessageDialog(null, "Ask the girl for help with your quest. Press the space bar to ask.");
 
 	}
@@ -72,8 +101,7 @@ public class RobotTreasureHunt implements KeyEventDispatcher{
 				} catch (InterruptedException e1) {
 					e1.printStackTrace();
 				}
-			}
-			else if (e.getKeyCode() == KeyEvent.VK_LEFT)
+			} else if (e.getKeyCode() == KeyEvent.VK_LEFT)
 				try {
 					turnLeft();
 				} catch (InterruptedException e2) {
@@ -96,7 +124,7 @@ public class RobotTreasureHunt implements KeyEventDispatcher{
 		}
 		return false;
 	}
-	
+
 	static void treasureFound() {
 		try {
 			URI uri = new URI("https://www.youtube.com/watch?v=G0aIg4N6aro");
@@ -106,8 +134,7 @@ public class RobotTreasureHunt implements KeyEventDispatcher{
 		}
 	}
 
-
-	public static void main (String[] args) throws MalformedURLException {
+	public static void main(String[] args) throws MalformedURLException {
 		new RobotTreasureHunt().go();
 	}
 }
