@@ -34,7 +34,7 @@ public class DragonFight {
 
 			// 8. Ask the player in a pop-up if they want to attack the dragon with a yell
 			// or a kick
-			String attack = JOptionPane.showInputDialog("Do you want to attack the dragon with yell or kick");
+			String attack = JOptionPane.showInputDialog("Do you want to attack the dragon with yell or kick?");
 			// 9. If they typed in "yell":
 			if (attack.equals("yell")) {
 				// -- Find a random number between 0 and 10 and store it in dragonDamage
@@ -44,31 +44,38 @@ public class DragonFight {
 				dragonHealth = 100 - dragonDamage;
 			}
 			// 10. If they typed in "kick":
-			if (attack.equals("kick"))
-				;
-			// -- Find a random number between 0 and 25 and store it in dragonDamage
-			dragonDamage = new Random().nextInt(25);
+			if (attack.equals("kick")) {
+				// -- Find a random number between 0 and 25 and store it in dragonDamage
+				dragonDamage = new Random().nextInt(25);
 
-			// -- Subtract that number from the dragon's health variable
-			dragonHealth = 100 - dragonDamage;
+				// -- Subtract that number from the dragon's health variable
+				dragonHealth -= dragonDamage;
+			}
+
+			// 11. Find a random number between 0 and 35 and store it in playerDamage
+			playerDamage = new Random().nextInt(30);
+			// 12. Subtract this number from the player's health
+			playerHealth -= playerDamage;
+			JOptionPane.showMessageDialog(null, "You have lost " + playerDamage + " health, and now have "
+					+ playerHealth + " health. You did " + "damage and the dragon is at " + dragonHealth + " health.");
 		}
-
-		// 11. Find a random number between 0 and 35 and store it in playerDamage
-		playerDamage = new Random().nextInt(30);
-		// 12. Subtract this number from the player's health
-		playerHealth = 100 - playerDamage;
 
 		// 13. If the user's health is less than or equal to 0
 		if (playerHealth <= 0) {
 			// -- Tell the user that they lost
-			JOptionPane.showMessageDialog(null, "you have been burned to a crisp!");
+			JOptionPane.showMessageDialog(null, "You have been eaten alive!");
 
 			// 14. Else if the dragon's health is less than or equal to 0
 		}
+		if (dragonHealth <= 0) {
 
-		// -- Tell the user that the dragon is dead and they took a ton of gold!
+			// -- Tell the user that the dragon is dead and they took a ton of gold!
+			JOptionPane.showMessageDialog(null, "You slayed the dragon and stole his gold!");
 
-		// 15. Else
+			// 15. Else
+		} else {
+
+		}
 
 		// -- Pop up a message that tells the their current health and the dragon's
 		// currently health (Bonus: Also display the amount of health that was lost for
